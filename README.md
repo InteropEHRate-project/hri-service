@@ -1,1 +1,1 @@
-# hri-service
+# InteropEHRate Health Record Index Service
