@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  mongocontainer:
+    image: mongo:latest
+    container_name: "mongocontainer"
+    restart: always
+    volumes:
+       - mongodata:/data/db
+    ports:
+      - 27017:27017
+  hrindexcontainer:
+    build: ../../..
+    image: hrindex:0.0.1-SNAPSHOT
+    container_name: "hrindexcontainer"
+    restart: always
+    ports:
+      - 8080:8080
+    links:
+      - mongocontainer
+    depends_on: 
+      - mongocontainer
+
+volumes:
+    mongodata:
