@@ -13,4 +13,5 @@ import java.util.Optional;
 @Repository
 public interface CitizenRepository extends MongoRepository<Citizen, String>, CrudRepository<Citizen, String> {
        Citizen findFirstByCitizenUsernameAndCloudUri(String citizenUsername, String cloudUri);
+       Citizen findCitizenByCitizenUsername(String citizenUsername);
 }

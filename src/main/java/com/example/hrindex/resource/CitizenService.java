@@ -122,6 +122,17 @@ public class CitizenService {
         return createJson(c, msg, re.getStatusCode().value(), auth);
     }
 
+    public String findUsername(String citizenUsername) throws Exception {
+        Citizen citizen = citizenRepository.findCitizenByCitizenUsername(citizenUsername);
+        if (citizen == null) throw new CitizenNotFoundException("USERNAME NOT FOUND  " + citizenUsername);
+        String msg = "Citizen found";
+        ResponseEntity<Citizen> re =  ResponseEntity.ok().body(citizen);
+        System.out.println(citizen);
+        String hriEmergencyToken = jwtUtil.generateEmergencyJwt(citizen);
+        String hriAccessToken = jwtUtil.generateAccessJwt(citizen);
+        return createTokenJson(citizen,msg,hriAccessToken,hriEmergencyToken,re.getStatusCode().value());
+    }
+
     public String createJson(Citizen citizen, String msg, int code, String auth) throws JSONException {
         String response;
         JSONObject json = new JSONObject();

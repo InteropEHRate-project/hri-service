@@ -95,4 +95,8 @@ public class CitizenController {
         return citizenService.updateCitizen(citizenId, emergencyToken, citizenUsername, cloudUri, auth);
     }
 
+    @GetMapping(value = "/citizen/username", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String findByUsername(@RequestHeader("citizenUsername") String citizenUsername) throws Exception {
+        return citizenService.findUsername(citizenUsername);
+    }
 }
